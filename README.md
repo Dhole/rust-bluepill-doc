@@ -375,3 +375,13 @@ At any point press `Ctrl-C` in the gdb console to pause execution and inspect
 the state of the program.  Add breakpoints to a line with `b LINE`.  For more
 information on how to use gdb, run `man gdb`.  For more information about the
 gdb-dashboard, see https://github.com/cyrus-and/gdb-dashboard/
+
+# Links
+
+- [Rust embedded book](https://rust-embedded.github.io/book/intro/index.html)
+- [Blue Pill info](https://wiki.stm32duino.com/index.php?title=Blue_Pill)
+- [STM32F103C8 info and datasheets](https://www.st.com/en/microcontrollers-microprocessors/stm32f103c8.html)
+- [stm32f1xx-hal crate](https://github.com/stm32-rs/stm32f1xx-hal)
+- [awesome-embedded-rust](https://github.com/rust-embedded/awesome-embedded-rust)
+- [SSD1306 (OLED screen) crate)](https://github.com/jamwaffles/ssd1306)
+- [Fixed-point numbers crate](https://docs.rs/fixed/0.3.2/fixed/index.html) (Remember that the stm32f103 doesn't have FPU)
