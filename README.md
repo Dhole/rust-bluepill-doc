@@ -396,6 +396,10 @@ the state of the program.  Add breakpoints to a line with `b LINE`.  For more
 information on how to use gdb, run `man gdb`.  For more information about the
 gdb-dashboard, see https://github.com/cyrus-and/gdb-dashboard/
 
+# Wrap up
+
+You can find an example of the complete setup in the [app folder](/app).
+
 # Links
 
 - [Rust embedded book](https://rust-embedded.github.io/book/intro/index.html)
