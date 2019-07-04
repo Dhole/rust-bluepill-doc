@@ -186,6 +186,24 @@ fn main() -> ! {
 }
 ```
 
+## Flashing configuration
+
+We will use openocd (a fantastic free software microcontroller debugger, which
+supports a wide range of devices) to flash the binary (and also to debug later).
+
+We need a configuration file for openocd to specify the details of our microcontroller and the programming interface.
+
+Edit the `openocd.cfg` to look like this:
+```
+# Revision C (newer revision)
+# source [find interface/stlink-v2-1.cfg]
+
+# Revision A and B (older revisions)
+source [find interface/stlink-v2.cfg]
+
+source [find target/stm32f1x.cfg]
+```
+
 # Build and flash
 
 Build:
@@ -203,6 +221,26 @@ You should see the green LED blinking ;-)
 
 You can use the `flash.sh` script for convenience.
 
+`flash.sh`
+```
+#!/bin/sh
+
+set -ex
+
+NAME=`basename ${PWD}`
+
+cargo build --release
+arm-none-eabi-objcopy -O binary target/thumbv7m-none-eabi/release/${NAME} ${NAME}.bin
+
+# stlink version
+# st-flash erase
+# st-flash write ${NAME}.bin 0x8000000
+
+# OpenOCD version
+# http://openocd.org/doc/html/Flash-Programming.html
+openocd -f openocd.cfg -c "program ${NAME}.bin reset exit 0x8000000"
+```
+
 # Debugging
 
 Edit `.cargo/config` to add these lines:
@@ -216,28 +254,12 @@ Edit `.cargo/config` to add these lines:
 
 # uncomment ONE of these three option to make `cargo run` start a GDB session
 # which option to pick depends on your system
-# runner = "arm-none-eabi-gdb -q -x openocd.gdb"
 runner = "arm-none-eabi-gdb -q -x openocd.gdb"
 # runner = "gdb-multiarch -q -x openocd.gdb"
 # runner = "gdb -q -x openocd.gdb"
 ```
 
-Edit `openocd.cfg` like this:
-
-```
-# Sample OpenOCD configuration for the STM32F3DISCOVERY development board
-
-# Depending on the hardware revision you got you'll have to pick ONE of these
-# interfaces. At any time only one interface should be commented out.
-
-# Revision C (newer revision)
-# source [find interface/stlink-v2-1.cfg]
-
-# Revision A and B (older revisions)
-source [find interface/stlink-v2.cfg]
-
-source [find target/stm32f1x.cfg]
-```
+We will use the `openocd.cfg` file we edited before.
 
 Download gdb-dashboard for a friendlier gdb interface:
 ```
@@ -292,7 +314,6 @@ In `Cargo.toml`:
 ```
 [dependencies]
 [...]
-cortex-m-semihosting = "0.3.2"
 panic-semihosting = "0.5.1"
 ```
 
