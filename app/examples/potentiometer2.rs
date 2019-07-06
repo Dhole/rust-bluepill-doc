@@ -46,7 +46,7 @@ fn main() -> ! {
 
     loop {
         let data: u16 = adc1.read(&mut ch0).unwrap();
-        let duty: u32 = (data as u32 - 2000) * max as u32 / 2000;
+        let duty: f32 = (data as f32 - 2000.0) * max as f32 / 2000.0;
         pwm.set_duty(duty as u16);
     }
 }
