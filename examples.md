@@ -47,11 +47,20 @@ The following circuit is required for code
 ALERT: The rotating logo code is not very clean.
 
 The following connections are required for code
-[display](https://github.com/Dhole/ssd1306/blob/master/examples/image_i2c.rs)
+[display](app/examples/display.rs),
+[display2](app/examples/display2.rs)
+[rotating logo](https://github.com/Dhole/ssd1306/blob/master/examples/image_i2c.rs)
 
 ```
-//! (black)  GND -> GND
-//! (red)    +5V -> VCC
-//! (yellow) SDA -> PB9
-//! (green)  SCL -> PB8
+GND -> GND
+VCC -> +5V
+PB9 -> SDA
+PB8 -> SCK
+
+PB5 -> +---+
+       | O |
+GND -> +---+
 ```
+
+About pull-up and pull-down:
+![](examples/pullup-pulldown.png)
