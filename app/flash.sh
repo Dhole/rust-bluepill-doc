@@ -2,10 +2,20 @@
 
 set -ex
 
-NAME=`basename ${PWD}`
+NAME="$1"
+if [ "$NAME" = "" ]; then
+    NAME=`basename ${PWD}`
+else
+    EXAMPLE=true
+fi
 
-cargo build --release
-arm-none-eabi-objcopy -O binary target/thumbv7m-none-eabi/release/${NAME} ${NAME}.bin
+if [ $EXAMPLE = true ]; then
+    cargo build --example ${NAME} --release
+    arm-none-eabi-objcopy -O binary target/thumbv7m-none-eabi/release/examples/${NAME} ${NAME}.bin
+else
+    cargo build --release
+    arm-none-eabi-objcopy -O binary target/thumbv7m-none-eabi/release/${NAME} ${NAME}.bin
+fi
 
 # stlink version
 # st-flash erase
