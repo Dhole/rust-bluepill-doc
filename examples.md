@@ -40,4 +40,4 @@ The following circuit is required for code
 [potentiometer](app/examples/potentiometer.rs) and
 [potentiometer2](app/examples/potentiometer2.rs)
 
-![](/examples/bd139.jpg)
+![](/examples/potentiometer.jpg)
