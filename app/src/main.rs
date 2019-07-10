@@ -9,7 +9,7 @@ use nb::block;
 use cortex_m_rt::entry;
 use stm32f1xx_hal::{pac, prelude::*, timer::Timer};
 
-use cortex_m_semihosting::hprintln;
+// use cortex_m_semihosting::hprintln;
 
 #[entry]
 fn main() -> ! {
@@ -40,9 +40,9 @@ fn main() -> ! {
     loop {
         block!(timer.wait()).unwrap();
         led.set_high();
-        hprintln!("LED off").unwrap();
+        // hprintln!("LED off").unwrap();
         block!(timer.wait()).unwrap();
         led.set_low();
-        hprintln!("LED on").unwrap();
+        // hprintln!("LED on").unwrap();
     }
 }
