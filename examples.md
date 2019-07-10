@@ -41,3 +41,17 @@ The following circuit is required for code
 [potentiometer2](app/examples/potentiometer2.rs)
 
 ![](/examples/potentiometer.jpg)
+
+## Display
+
+ALERT: The rotating logo code is not very clean.
+
+The following connections are required for code
+[display](https://github.com/Dhole/ssd1306/blob/master/examples/image_i2c.rs)
+
+```
+//! (black)  GND -> GND
+//! (red)    +5V -> VCC
+//! (yellow) SDA -> PB9
+//! (green)  SCL -> PB8
+```
