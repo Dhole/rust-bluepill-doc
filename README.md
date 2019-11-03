@@ -409,3 +409,16 @@ You can find an example of the complete setup in the [app folder](/app).
 - [awesome-embedded-rust](https://github.com/rust-embedded/awesome-embedded-rust)
 - [SSD1306 (OLED screen) crate)](https://github.com/jamwaffles/ssd1306)
 - [Fixed-point numbers crate](https://docs.rs/fixed/0.3.2/fixed/index.html) (Remember that the stm32f103 doesn't have FPU)
+
+# Troubleshooting
+
+## Unable to flash the microcontroller (flash size reported is 0 bytes)
+
+The microcontroller is probably in a locked state and needs to be unlocked for the flash to be written:
+```
+openocd -f openocd.cfg -c "init; stm32f1x unlock 0"
+```
+
+## `= note: rust-lld: error: no memory region specified for section '.ARM.exidx'`
+
+Upgrade `cortex-m-rt` from 0.6.7 to 0.6.10 in Cargo.toml.
